@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+
+{% block title %}Security cameras, recorders, switches and cables | TechGrid{% endblock %}
+
+{% block meta_description %}Security cameras, video recorders, network switches and cables with full technical specifications. Build your order and send it on WhatsApp.{% endblock %}
+
+{% block content %}
+
+{# ---------- Hero ---------- #}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__inner">
+
+    <div class="hero__content">
+      <h1 class="hero__title" id="hero-title">Cameras, recorders, switches and cables for your security system.</h1>
+      <p class="lead hero__lead">Every product lists its full technical specifications. Build your order here and send it on WhatsApp. We confirm availability, final price and delivery with you.</p>
+      <div class="cluster hero__actions">
+        <a class="btn btn--primary" href="{% url 'products:shop' %}">Shop now</a>
+        <a class="btn btn--secondary" href="{% url 'products:contact' %}">Contact us</a>
+      </div>
+    </div>
+
+    {# Decorative drawing of a rack-mounted network switch and a blank panel #}
+    <div class="hero__panel" aria-hidden="true">
+      <svg class="rack" viewBox="0 0 480 226" focusable="false">
+        <defs>
+          <pattern id="rack-ports" x="50" y="40" width="34" height="46" patternUnits="userSpaceOnUse">
+            <circle cx="10" cy="6" r="2" fill="#3a4651"/>
+            <circle cx="24" cy="6" r="2" fill="#3a4651"/>
+            <rect x="5" y="14" width="24" height="22" rx="2" fill="#0d1115" stroke="#3a4651"/>
+            <rect x="9" y="29" width="16" height="4" fill="#4b5864"/>
+          </pattern>
+        </defs>
+
+        {# Switch, 1U #}
+        <rect x="10" y="10" width="460" height="150" rx="6" fill="#1a2027" stroke="#28313a"/>
+        <rect x="10" y="10" width="26" height="150" rx="6" fill="#232b33"/>
+        <rect x="444" y="10" width="26" height="150" rx="6" fill="#232b33"/>
+        <circle cx="23" cy="30" r="4" fill="#0d1115" stroke="#3a4651"/>
+        <circle cx="23" cy="140" r="4" fill="#0d1115" stroke="#3a4651"/>
+        <circle cx="457" cy="30" r="4" fill="#0d1115" stroke="#3a4651"/>
+        <circle cx="457" cy="140" r="4" fill="#0d1115" stroke="#3a4651"/>
+        <rect x="50" y="40" width="374" height="92" fill="url(#rack-ports)"/>
+        <rect x="50" y="142" width="120" height="3" rx="1.5" fill="#28313a"/>
+
+        {# Link lights: green = link, blue = uplink #}
+        <g fill="#5ad39b">
+          <circle cx="60"  cy="46" r="2"/><circle cx="94"  cy="46" r="2"/>
+          <circle cx="162" cy="46" r="2"/><circle cx="196" cy="46" r="2"/>
+          <circle cx="264" cy="46" r="2"/>
+          <circle cx="60"  cy="92" r="2"/><circle cx="128" cy="92" r="2"/>
+          <circle cx="162" cy="92" r="2"/><circle cx="298" cy="92" r="2"/>
+          <circle cx="366" cy="92" r="2"/>
+        </g>
+        <g fill="#7fb0f5">
+          <circle cx="400" cy="46" r="2"/><circle cx="414" cy="46" r="2"/>
+          <circle cx="400" cy="92" r="2"/>
+        </g>
+
+        {# Blank panel with vent slots #}
+        <rect x="10" y="172" width="460" height="44" rx="6" fill="#1a2027" stroke="#28313a"/>
+        <rect x="10" y="172" width="26" height="44" rx="6" fill="#232b33"/>
+        <rect x="444" y="172" width="26" height="44" rx="6" fill="#232b33"/>
+        <circle cx="23" cy="194" r="4" fill="#0d1115" stroke="#3a4651"/>
+        <circle cx="457" cy="194" r="4" fill="#0d1115" stroke="#3a4651"/>
+        <g fill="#28313a">
+          <rect x="50" y="184" width="374" height="3" rx="1.5"/>
+          <rect x="50" y="192" width="374" height="3" rx="1.5"/>
+          <rect x="50" y="200" width="374" height="3" rx="1.5"/>
+        </g>
+      </svg>
+    </div>
+
+  </div>
+</section>
+
+
+{# ---------- Categories (only active categories, filled from the database) ---------- #}
+{% if categories %}
+<section class="section" aria-labelledby="categories-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="categories-title">Shop by category</h2>
+      <a href="{% url 'products:shop' %}">All products</a>
+    </div>
+
+    <div class="category-grid">
+      {% for category in categories %}
+        <article class="category-card">
+          <h3 class="category-card__name">
+            <a class="category-card__link stretched-link" href="{% url 'products:category_detail' slug=category.slug %}">{{ category.name }}</a>
+          </h3>
+          {% if category.description %}
+            <p class="category-card__text">{{ category.description|truncatewords:16 }}</p>
+          {% endif %}
+          <p class="category-card__meta">
+            <span>{{ category.product_count }} product{{ category.product_count|pluralize }}</span>
+            <span class="category-card__chevron" aria-hidden="true">
+               <a class="category-card__link stretched-link" href="{% url 'products:category_detail' slug=category.slug %}"></a>
+            </span>
+          </p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+
+{# ---------- Featured products ---------- #}
+<section class="section" aria-labelledby="featured-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="featured-title">Featured products</h2>
+      <a href="{% url 'products:shop' %}">View all products</a>
+    </div>
+
+    {% if featured_products %}
+      <div class="product-grid">
+        {% for product in featured_products %}
+          {# Resolves once a route named "product_detail" (with a slug) exists. Until then the link is "#". #}
+          {% url 'products:product_detail' slug=product.slug as product_url %}
+          <article class="product-card">
+
+            <div class="product-card__media">
+              {% with image=product.images.all.0 %}
+                {% if image %}
+                  <img src="{{ image.image.url }}" alt="{{ image.alt_text }}" width="400" height="300" loading="lazy">
+                {% else %}
+                  <span class="product-card__empty">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                      <path d="M3.5 7.5L12 3l8.5 4.5v9L12 21l-8.5-4.5z"/><path d="M3.5 7.5L12 12l8.5-4.5M12 12v9"/>
+                    </svg>
+                    <span class="visually-hidden">No image available</span>
+                  </span>
+                {% endif %}
+              {% endwith %}
+              {% if product.is_on_sale %}
+                <span class="badge badge--sale product-card__badge">Sale</span>
+              {% endif %}
+            </div>
+
+            <div class="product-card__body">
+              <p class="product-card__brand">{{ product.brand|default:product.category.name }}</p>
+              <h3 class="product-card__title">
+                <a class="product-card__link" href="{{ product_url|default:'#' }}">{{ product.name }}</a>
+              </h3>
+
+              {% if product.specifications %}
+                <dl class="product-card__specs">
+                  {% for name, value in product.specifications.items %}
+                    {% if forloop.counter <= 3 %}
+                      <div><dt>{{ name }}</dt><dd>{{ value }}</dd></div>
+                    {% endif %}
+                  {% endfor %}
+                </dl>
+              {% endif %}
+
+              {% if not product.is_available %}
+                <p class="stock stock--out">Out of stock</p>
+              {% elif product.stock > 0 %}
+                <p class="stock stock--in">In stock</p>
+              {% else %}
+                <p class="stock stock--order">On order</p>
+              {% endif %}
+            </div>
+
+            <div class="product-card__footer">
+              <p class="price">
+                <span class="price__now">{{ product.price|floatformat:2 }} &#8382;</span>
+                {% if product.is_on_sale %}
+                  <s class="price__old"><span class="visually-hidden">Previous price </span>{{ product.old_price|floatformat:2 }} &#8382;</s>
+                {% endif %}
+              </p>
+              {# data-* attributes are read by the cart script that comes later #}
+              <button class="btn btn--primary btn--block product-card__action" type="button"
+                      data-add-to-cart
+                      data-product-id="{{ product.pk }}"
+                      data-sku="{{ product.sku }}"
+                      data-name="{{ product.name }}"
+                      data-price="{{ product.price }}"
+                      {% if not product.is_available %}disabled{% endif %}>
+                Add to cart
+              </button>
+            </div>
+
+          </article>
+        </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state">
+        <h3>No featured products yet</h3>
+        <p>Products marked as featured in the admin panel appear here. You can still browse everything we sell.</p>
+        <a class="btn btn--primary" href="{% url 'products:shop' %}">Go to the shop</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+
+{# ---------- Trust and benefits ---------- #}
+<section class="section section--white" aria-labelledby="benefits-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="benefits-title">What you can expect</h2>
+    </div>
+
+    <ul class="benefits" role="list">
+      <li class="benefit">
+        <svg class="benefit__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M3 6.5h11v9H3z"/><path d="M14 9.5h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/>
+        </svg>
+        <h3 class="benefit__title">Delivery</h3>
+        <p>We agree delivery details with you on WhatsApp when we confirm your order.</p>
+      </li>
+      <li class="benefit">
+        <svg class="benefit__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M12 3l7 3v5.2c0 4.4-2.9 7.9-7 9.8-4.1-1.9-7-5.4-7-9.8V6z"/><path d="M9 12l2.2 2.2L15.2 10"/>
+        </svg>
+        <h3 class="benefit__title">Warranty</h3>
+        <p>Read how warranty works on our <a href="{% url 'products:warranty' %}">warranty page</a>.</p>
+      </li>
+      <li class="benefit">
+        <svg class="benefit__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M4 5.5h16v11H9.5L5 20.5v-4H4z"/><path d="M8 10h8M8 13h5"/>
+        </svg>
+        <h3 class="benefit__title">Support</h3>
+        <p>Questions about a product or your setup? Message or call us before you order.</p>
+      </li>
+      <li class="benefit">
+        <svg class="benefit__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M6 3h8.5L18 6.5V21H6z"/><path d="M9 11h6M9 14.5h6M9 18h3.5"/>
+        </svg>
+        <h3 class="benefit__title">Quality</h3>
+        <p>Each product page lists its full technical specifications, so you can check it fits before you order.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+{# ---------- Final call to action ---------- #}
+<section class="cta-band" aria-labelledby="cta-title">
+  <div class="container cta-band__inner">
+    <div class="cta-band__text">
+      <h2 id="cta-title">Not sure what to order?</h2>
+      <p>Tell us about your setup on WhatsApp and we will suggest suitable equipment, or browse the shop and build your order yourself.</p>
+    </div>
+    <div class="cluster cta-band__actions">
+      {# PLACEHOLDER: use the same WhatsApp number as in base.html #}
+      <a class="btn btn--whatsapp" href="https://wa.me/995500000000" rel="noopener">Message us on WhatsApp</a>
+      <a class="btn btn--secondary" href="{% url 'products:shop' %}">Browse the shop</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

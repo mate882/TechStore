@@ -1,0 +1,158 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1a2027">
+
+  <title>{% block title %}TechGrid | Security cameras, recorders, switches and cables{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Security cameras, video recorders, network switches and cables. Choose your products and send your order on WhatsApp.{% endblock %}">
+
+  {# Marks the page as JavaScript-capable before the first paint. CSS relies on it for the mobile menu. #}
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+
+  {# Fonts: Barlow (Latin) with Noto Sans Georgian as the fallback for Georgian text #}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@500;600&family=Noto+Sans+Georgian:wght@400;500;600&display=swap">
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_css %}{% endblock %}
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  {# ---------- Utility bar: contact details stay visible on every page ---------- #}
+  <div class="utility-bar">
+    <div class="container utility-bar__inner">
+      <p class="utility-bar__note">Order on WhatsApp. We confirm availability, price and delivery with you.</p>
+      <div class="utility-bar__contact">
+        {# PLACEHOLDER: replace with the real phone and WhatsApp numbers #}
+        <a href="tel:+995500000000">+995 5XX XX XX XX</a>
+        <a href="https://wa.me/995500000000" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  {# ---------- Header ---------- #}
+  <header class="site-header">
+    <div class="container site-header__inner">
+
+      <a class="brand" href="{% url 'pages:home' %}" aria-label="TechGrid, home">
+        <svg class="brand__mark" width="36" height="19" viewBox="0 0 30 16" aria-hidden="true" focusable="false">
+          <rect x="0"  y="0"  width="6" height="6" rx="1" fill="currentColor"/>
+          <rect x="8"  y="0"  width="6" height="6" rx="1" fill="currentColor"/>
+          <rect x="16" y="0"  width="6" height="6" rx="1" fill="currentColor"/>
+          <rect x="24" y="0"  width="6" height="6" rx="1" fill="var(--accent-on-ink)"/>
+          <rect x="0"  y="10" width="6" height="6" rx="1" fill="currentColor"/>
+          <rect x="8"  y="10" width="6" height="6" rx="1" fill="currentColor"/>
+          <rect x="16" y="10" width="6" height="6" rx="1" fill="currentColor"/>
+          <rect x="24" y="10" width="6" height="6" rx="1" fill="currentColor"/>
+        </svg>
+        <span class="brand__name">TechGrid</span>
+      </a>
+
+      <div class="header-actions">
+        <a class="icon-btn" href="{% url 'pages:cart' %}" data-cart-link aria-label="Cart, 0 items">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M3 4h2.2l2.3 10.9a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.76L20 8H6.3"/>
+            <circle cx="9.5" cy="19.5" r="1.25"/>
+            <circle cx="17" cy="19.5" r="1.25"/>
+          </svg>
+          <span class="cart-count" data-cart-count data-count="0" aria-hidden="true">0</span>
+        </a>
+
+        <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu" data-nav-toggle>
+          <svg class="nav-toggle__open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg class="nav-toggle__close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        {% with current=request.resolver_match.url_name %}
+        <ul class="nav-list">
+          <li><a class="nav-link" href="{% url 'pages:home' %}"{% if current == 'home' %} aria-current="page"{% endif %}>Home</a></li>
+          <li><a class="nav-link" href="{% url 'products:shop' %}"{% if current == 'shop' %} aria-current="page"{% endif %}>Shop</a></li>
+          <li>
+            <details class="nav-dropdown" data-dropdown>
+              <summary class="nav-link{% if current == 'category_detail' %} is-current{% endif %}">Categories</summary>
+              <ul class="dropdown-panel">
+                <li><a class="dropdown-link" href="{% url 'products:shop' %}">All products</a></li>
+                {# nav_categories comes from a context processor (see design_explanation.md) #}
+                {% for category in nav_categories %}
+                  <li><a class="dropdown-link" href="{% url 'category_detail' slug=category.slug %}">{{ category.name }}</a></li>
+                {% endfor %}
+              </ul>
+            </details>
+          </li>
+          <li><a class="nav-link" href="{% url 'products:contact' %}"{% if current == 'contact' %} aria-current="page"{% endif %}>Contact</a></li>
+        </ul>
+        {% endwith %}
+      </nav>
+
+    </div>
+  </header>
+
+  {# ---------- Page content ---------- #}
+  <main class="site-main" id="main" tabindex="-1">
+    {% block content %}{% endblock %}
+  </main>
+
+  {# ---------- Footer ---------- #}
+  <footer class="site-footer">
+    <div class="container footer-grid">
+
+      <section class="footer-col" aria-labelledby="footer-about">
+        <h2 class="footer-title" id="footer-about">TechGrid</h2>
+        <p class="footer-text">Security cameras, video recorders, network switches and cables. You choose the products here and send your order on WhatsApp. We then confirm availability, final price and delivery with you.</p>
+      </section>
+
+      <nav class="footer-col" aria-labelledby="footer-shop">
+        <h2 class="footer-title" id="footer-shop">Shop</h2>
+        <ul class="footer-links">
+          <li><a href="{% url 'products:shop' %}">All products</a></li>
+          {% for category in nav_categories %}
+            <li><a href="{% url 'category_detail' slug=category.slug %}">{{ category.name }}</a></li>
+          {% endfor %}
+          <li><a href="{% url 'pages:cart' %}">Cart</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-col" aria-labelledby="footer-info">
+        <h2 class="footer-title" id="footer-info">Customer information</h2>
+        <ul class="footer-links">
+          <li><a href="{% url 'products:delivery' %}">Delivery</a></li>
+          <li><a href="{% url 'products:warranty' %}">Warranty</a></li>
+          <li><a href="{% url 'products:returns' %}">Returns and withdrawal</a></li>
+          <li><a href="{% url 'products:contact' %}">Contact</a></li>
+        </ul>
+      </nav>
+
+      <section class="footer-col" aria-labelledby="footer-contact">
+        <h2 class="footer-title" id="footer-contact">Contact us</h2>
+        {# PLACEHOLDERS: replace with the real business details #}
+        <address class="footer-contact">
+          <ul class="footer-links">
+            <li><a href="tel:+995500000000">+995 5XX XX XX XX</a></li>
+            <li><a href="https://wa.me/995500000000" rel="noopener">Message us on WhatsApp</a></li>
+            <li><a href="mailto:email@example.com">email@example.com</a></li>
+            <li class="footer-text">[Store address]</li>
+          </ul>
+        </address>
+      </section>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom__inner">
+        <p>&copy; {% now "Y" %} TechGrid. All rights reserved.</p>
+        <p>Prices on the site are for guidance. The final price is confirmed on WhatsApp.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{% static 'js/main.js' %}" defer></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,105 @@
+/* ==========================================================================
+   TechGrid: category detail page
+   File: static/products/css/category_detail.css
+   Loaded after style.css. The page head, breadcrumb, product grid, product cards
+   and empty state come from style.css. This file adds only the product count and
+   the sort links above the grid.
+
+   Contents
+   1. Toolbar (product count and sorting)
+   2. Sort links
+   3. Product card alignment
+   ========================================================================== */
+
+
+/* 1. Toolbar
+   Stacked on phones, one row with the count on the left and sorting on the
+   right from 40rem.
+   -------------------------------------------------------------------------- */
+.listing-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.listing-count {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.listing-count strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+@media (min-width: 40rem) {
+  .listing-toolbar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+
+/* 2. Sort links
+   Plain links to ?sort=..., so sorting works without JavaScript.
+   The current choice is marked with aria-current and a blue outline.
+   -------------------------------------------------------------------------- */
+.sort {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+}
+
+.sort__label {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.sort__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.sort__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding-inline: 0.875rem;
+  background: var(--white);
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+
+.sort__link:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.sort__link[aria-current="true"] {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-hover);
+}
+
+
+/* 3. Product card alignment
+   Two small fixes to the shared product card, so a row of cards lines up:
+   - the photo area keeps its 4:3 shape even when a photo is taller than that
+   - the stock label stays next to the price when a product has no specifications
+   They belong to the shared card, so they can move into style.css later.
+   -------------------------------------------------------------------------- */
+.product-card__media { overflow: hidden; }
+.product-card__body > .stock { margin-top: auto; }
+.product-card__specs + .stock { margin-top: 0; }

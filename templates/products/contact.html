@@ -1,0 +1,344 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact Us | TechGrid{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="contact-page">
+
+    <!-- Page introduction -->
+    <section class="contact-hero">
+        <div class="container">
+            <div class="contact-hero__content">
+                <span class="contact-eyebrow">WE'RE HERE TO HELP</span>
+                <h1>Let's talk <span>technology.</span></h1>
+                <p>
+                    Need help choosing the right equipment, checking product
+                    availability, or planning a network installation?
+                    Tell us what you need. We'll help you find the right solution.
+                </p>
+
+                <a class="contact-hero__link" href="#contact-form">
+                    Get in touch
+                    <span aria-hidden="true">↓</span>
+                </a>
+            </div>
+
+            <div class="contact-hero__visual" aria-hidden="true">
+                <div class="contact-visual__ring contact-visual__ring--outer"></div>
+                <div class="contact-visual__ring contact-visual__ring--inner"></div>
+
+                <div class="contact-visual__center">
+                    <svg viewBox="0 0 64 64" fill="none">
+                        <path d="M12 17.5A7.5 7.5 0 0 1 19.5 10h25a7.5 7.5 0 0 1 7.5 7.5v18a7.5 7.5 0 0 1-7.5 7.5H31L19 53v-10.5a7.5 7.5 0 0 1-7-7z"/>
+                        <path d="M22 23h20M22 31h14"/>
+                    </svg>
+                </div>
+
+                <span class="contact-visual__dot contact-visual__dot--one"></span>
+                <span class="contact-visual__dot contact-visual__dot--two"></span>
+                <span class="contact-visual__dot contact-visual__dot--three"></span>
+
+                <div class="contact-visual__label">
+                    <span class="contact-visual__status"></span>
+                    YOUR NEXT PROJECT STARTS HERE
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact options -->
+    <section class="contact-options">
+        <div class="container">
+            <div class="contact-section-heading">
+                <span class="contact-eyebrow">CONTACT OPTIONS</span>
+                <h2>Choose how to reach us.</h2>
+            </div>
+
+            <div class="contact-options__grid">
+
+                <article class="contact-option">
+                    <div class="contact-option__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.5 8.5 0 0 1 8.7 3.9a8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/>
+                        </svg>
+                    </div>
+
+                    <span class="contact-option__label">QUICK RESPONSE</span>
+                    <h3>WhatsApp</h3>
+                    <p>
+                        Ask about products, prices, availability, or your order
+                        directly through WhatsApp.
+                    </p>
+
+                    {% if whatsapp_number %}
+                        <a
+                            class="contact-option__link"
+                            href="https://wa.me/{{ whatsapp_number }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Chat with us <span aria-hidden="true">↗</span>
+                        </a>
+                    {% else %}
+                        <span class="contact-option__unavailable">
+                            WhatsApp contact coming soon
+                        </span>
+                    {% endif %}
+                </article>
+
+                <article class="contact-option">
+                    <div class="contact-option__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <rect x="3" y="5" width="18" height="14" rx="2"/>
+                            <path d="m3 7 9 6 9-6"/>
+                        </svg>
+                    </div>
+
+                    <span class="contact-option__label">WRITTEN INQUIRIES</span>
+                    <h3>Email</h3>
+                    <p>
+                        Prefer email? Send us your question or details about
+                        the equipment you're looking for.
+                    </p>
+
+                    {% if contact_email %}
+                        <a class="contact-option__link" href="mailto:{{ contact_email }}">
+                            {{ contact_email }} <span aria-hidden="true">↗</span>
+                        </a>
+                    {% else %}
+                        <span class="contact-option__unavailable">
+                            Email contact coming soon
+                        </span>
+                    {% endif %}
+                </article>
+
+                <article class="contact-option">
+                    <div class="contact-option__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.2-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.8 2.1z"/>
+                        </svg>
+                    </div>
+
+                    <span class="contact-option__label">DIRECT CONTACT</span>
+                    <h3>Phone</h3>
+                    <p>
+                        Have a specific question? Use the phone contact
+                        if you prefer to speak with someone directly.
+                    </p>
+
+                    {% if contact_phone %}
+                        <a class="contact-option__link" href="tel:{{ contact_phone }}">
+                            {{ contact_phone }} <span aria-hidden="true">↗</span>
+                        </a>
+                    {% else %}
+                        <span class="contact-option__unavailable">
+                            Phone contact coming soon
+                        </span>
+                    {% endif %}
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Inquiry form -->
+    <section class="contact-form-section" id="contact-form">
+        <div class="container contact-form-layout">
+
+            <div class="contact-form-intro">
+                <span class="contact-eyebrow">SEND AN INQUIRY</span>
+                <h2>Tell us what you need.</h2>
+                <p>
+                    Whether you're choosing a security camera, building a
+                    network, or comparing equipment, give us a few details
+                    so we can understand your requirements.
+                </p>
+
+                <div class="contact-form-intro__note">
+                    <span aria-hidden="true">01</span>
+                    <div>
+                        <strong>Be specific</strong>
+                        <p>Include product names, quantities, or technical requirements if known.</p>
+                    </div>
+                </div>
+
+                <div class="contact-form-intro__note">
+                    <span aria-hidden="true">02</span>
+                    <div>
+                        <strong>We'll clarify the details</strong>
+                        <p>Availability, pricing, and delivery can be confirmed with you.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-card">
+                <div class="contact-form-card__heading">
+                    <h3>Send us a message</h3>
+                    <p>Fields marked with * are required.</p>
+                </div>
+
+                {% if whatsapp_number %}
+                    <form
+                        class="contact-form"
+                        id="techgrid-contact-form"
+                        data-whatsapp="{{ whatsapp_number }}"
+                    >
+                        {% csrf_token %}
+
+                        <div class="contact-form__row">
+                            <div class="contact-field">
+                                <label for="contact-name">Your name *</label>
+                                <input
+                                    type="text"
+                                    id="contact-name"
+                                    name="name"
+                                    placeholder="Enter your name"
+                                    autocomplete="name"
+                                    required
+                                    maxlength="100"
+                                >
+                            </div>
+
+                            <div class="contact-field">
+                                <label for="contact-email">Email address</label>
+                                <input
+                                    type="email"
+                                    id="contact-email"
+                                    name="email"
+                                    placeholder="you@example.com"
+                                    autocomplete="email"
+                                    maxlength="254"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="contact-field">
+                            <label for="contact-topic">What can we help with? *</label>
+                            <select id="contact-topic" name="topic" required>
+                                <option value="" selected disabled>Select an inquiry type</option>
+                                <option value="Product information">Product information</option>
+                                <option value="Price and availability">Price and availability</option>
+                                <option value="Security camera systems">Security camera systems</option>
+                                <option value="Networking equipment">Networking equipment</option>
+                                <option value="Bulk or business order">Bulk or business order</option>
+                                <option value="Existing order">Existing order</option>
+                                <option value="Other inquiry">Other inquiry</option>
+                            </select>
+                        </div>
+
+                        <div class="contact-field">
+                            <label for="contact-message">Your message *</label>
+                            <textarea
+                                id="contact-message"
+                                name="message"
+                                rows="5"
+                                placeholder="Tell us what products or assistance you're looking for..."
+                                required
+                                maxlength="3000"
+                            ></textarea>
+                            <span class="contact-field__hint">
+                                Product names, quantities, and requirements are helpful.
+                            </span>
+                        </div>
+
+                        <button class="contact-form__submit" type="submit">
+                            <span>Continue to WhatsApp</span>
+                            <span aria-hidden="true">↗</span>
+                        </button>
+
+                        <p class="contact-form__disclaimer">
+                            Your message will be prepared in WhatsApp. It will
+                            only be sent when you press Send in WhatsApp.
+                        </p>
+
+                        <p
+                            class="contact-form__error"
+                            id="contact-form-error"
+                            role="alert"
+                            hidden
+                        ></p>
+                    </form>
+                {% else %}
+                    <div class="contact-form__setup-note">
+                        <h3>Contact form temporarily unavailable</h3>
+                        <p>
+                            The WhatsApp contact number has not been configured yet.
+                            Add <code>WHATSAPP_NUMBER</code> to your Django settings
+                            to enable this form.
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Closing call to action -->
+    <section class="contact-bottom">
+        <div class="container contact-bottom__inner">
+            <div>
+                <span class="contact-eyebrow">STILL EXPLORING?</span>
+                <h2>Find the right equipment for your setup.</h2>
+                <p>Browse our products and get in touch if you need help deciding.</p>
+            </div>
+
+            <a class="contact-bottom__button" href="{% url 'products:shop' %}">
+                Explore products <span aria-hidden="true">→</span>
+            </a>
+        </div>
+    </section>
+
+</main>
+
+{% if whatsapp_number %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("techgrid-contact-form");
+        const error = document.getElementById("contact-form-error");
+
+        if (!form) return;
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (!form.reportValidity()) return;
+
+            const formData = new FormData(form);
+            const name = (formData.get("name") || "").trim();
+            const email = (formData.get("email") || "").trim();
+            const topic = formData.get("topic");
+            const message = (formData.get("message") || "").trim();
+            const number = form.dataset.whatsapp.replace(/\D/g, "");
+
+            if (!number) {
+                error.textContent = "The WhatsApp number is not configured correctly.";
+                error.hidden = false;
+                return;
+            }
+
+            const lines = [
+                "Hello TechGrid, I'd like to make an inquiry.",
+                "",
+                "Name: " + name,
+                "Email: " + (email || "Not provided"),
+                "Inquiry type: " + topic,
+                "",
+                "Message:",
+                message
+            ];
+
+            const url = "https://wa.me/" + number
+                + "?text=" + encodeURIComponent(lines.join("\n"));
+
+            error.hidden = true;
+            window.open(url, "_blank", "noopener,noreferrer");
+        });
+    });
+</script>
+{% endif %}
+{% endblock %}

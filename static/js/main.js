@@ -116,6 +116,78 @@
     });
   }
 
+    /* ------------------------------------------------------------------------
+     Add to Cart
+     Listens for clicks on [data-add-to-cart] buttons and saves the product
+     into localStorage. Uses the existing TechGrid helpers.
+     ------------------------------------------------------------------------ */
+    function initAddToCart() {
+      document.addEventListener('click', function (event) {
+        var button = event.target.closest('[data-add-to-cart]');
+        if (!button || button.disabled) {
+          console.log('No button or disabled');
+          return;
+        }
+
+        var id = button.getAttribute('data-product-id');
+        var sku = button.getAttribute('data-sku');
+        var name = button.getAttribute('data-name');
+        var price = button.getAttribute('data-price');
+        var image = button.getAttribute('data-image') || '';
+
+        console.log('Data:', { id: id, sku: sku, name: name, price: price });
+
+        if (!id || !sku || !name || !price) {
+          console.log('Missing data');
+          return;
+        }
+
+        var cart = window.TechGrid.readCart();
+        console.log('Current cart:', cart);
+
+        var existing = cart.find(function (item) {
+          return String(item.id) === String(id);
+        });
+
+        if (existing) {
+          existing.qty = (Number(existing.qty) || 0) + 1;
+          console.log('Increased quantity');
+        } else {
+          cart.push({
+            id: id,
+            sku: sku,
+            name: name,
+            price: price,
+            image: button.getAttribute('data-image') || '',
+            qty: 1
+          });
+          console.log('Added new product');
+        }
+
+        try {
+          window.localStorage.setItem(window.TechGrid.CART_KEY, JSON.stringify(cart));
+          console.log('Saved to localStorage');
+        } catch (error) {
+          console.log('Error saving:', error);
+          return;
+        }
+
+        window.TechGrid.updateCartBadge();
+        console.log('Badge updated');
+
+        var originalText = button.textContent;
+        button.textContent = 'Added';
+        button.disabled = true;
+
+        setTimeout(function () {
+          button.textContent = originalText;
+          button.disabled = false;
+        }, 1200);
+
+        document.dispatchEvent(new Event('cart:updated'));
+      });
+    }
+
   /* ------------------------------------------------------------------------
      5. Start-up
      ------------------------------------------------------------------------ */
@@ -123,6 +195,7 @@
     updateCartBadge();
     initMobileMenu();
     initDropdowns();
+    initAddToCart();
 
     // Keep the badge correct when the cart changes in another tab,
     // or when later code announces a change with: document.dispatchEvent(new Event('cart:updated'))

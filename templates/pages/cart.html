@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Your Cart | TechGrid{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="cart-page section">
+  <div class="container">
+
+    <div class="section-head">
+      <h1>Your Cart</h1>
+    </div>
+
+    {# Empty state #}
+    <div id="cart-empty" class="empty-state" hidden>
+      <h2>Your cart is empty</h2>
+      <p>Add products from the shop, then come back here to review your order.</p>
+      <a href="{% url 'products:shop' %}" class="btn btn--primary">Continue Shopping</a>
+    </div>
+
+    {# Cart content #}
+    <div id="cart-content" hidden>
+      <div class="cart-layout">
+
+        {# Items list #}
+        <div class="cart-items" id="cart-items">
+        </div>
+
+        {# Summary #}
+        <aside class="cart-summary">
+          <div class="cart-summary__box">
+            <h2>Order Summary</h2>
+
+            <div class="cart-summary__row">
+              <span>Subtotal</span>
+              <span id="cart-subtotal">0.00 ₾</span>
+            </div>
+
+            <p class="cart-summary__note">
+              Final price, delivery and availability will be confirmed on WhatsApp.
+            </p>
+
+            <button type="button" class="btn btn--primary btn--block" id="order-whatsapp" disabled>
+              Order via WhatsApp
+            </button>
+
+            <a href="{% url 'products:shop' %}" class="btn btn--secondary btn--block">
+              Continue Shopping
+            </a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}

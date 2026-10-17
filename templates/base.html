@@ -79,9 +79,8 @@
               <summary class="nav-link{% if current == 'category_detail' %} is-current{% endif %}">Categories</summary>
               <ul class="dropdown-panel">
                 <li><a class="dropdown-link" href="{% url 'products:shop' %}">All products</a></li>
-                {# nav_categories comes from a context processor (see design_explanation.md) #}
-                {% for category in nav_categories %}
-                  <li><a class="dropdown-link" href="{% url 'category_detail' slug=category.slug %}">{{ category.name }}</a></li>
+                {% for category in categories %}
+                  <li><a class="dropdown-link" href="{% url 'products:category_detail' slug=category.slug %}">{{ category.name }}</a></li>
                 {% endfor %}
               </ul>
             </details>
@@ -112,8 +111,8 @@
         <h2 class="footer-title" id="footer-shop">Shop</h2>
         <ul class="footer-links">
           <li><a href="{% url 'products:shop' %}">All products</a></li>
-          {% for category in nav_categories %}
-            <li><a href="{% url 'category_detail' slug=category.slug %}">{{ category.name }}</a></li>
+          {% for category in categories %}
+            <li><a href="{% url 'products:category_detail' slug=category.slug %}">{{ category.name }}</a></li>
           {% endfor %}
           <li><a href="{% url 'pages:cart' %}">Cart</a></li>
         </ul>

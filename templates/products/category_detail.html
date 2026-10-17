@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ category.name }} | TechGrid{% endblock %}
+
+{% block meta_description %}
+    {% if category.description %}
+        {{ category.description|truncatechars:155 }}
+    {% else %}
+        {{ category.name }} at TechGrid. Browse products with full technical specifications and order on WhatsApp.
+    {% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/category_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+{# ---------- Page head: breadcrumb, category name and description ---------- #}
+<div class="page-head">
+  <div class="container">
+
+    <h1>{{ category.name }}</h1>
+
+    {% if category.description %}
+      <p class="lead">{{ category.description }}</p>
+    {% endif %}
+  </div>
+</div>
+
+{# ---------- Product listing ---------- #}
+<section class="section" aria-labelledby="listing-title">
+  <div class="container">
+    <h2 class="visually-hidden" id="listing-title">Products in {{ category.name }}</h2>
+
+    {% if products %}
+      <div class="listing-toolbar">
+        <p class="listing-count"><strong>{{ product_count }}</strong> product{{ product_count|pluralize }}</p>
+
+        <nav class="sort" aria-label="Sort products">
+          <span class="sort__label">Sort by</span>
+          <ul class="sort__list">
+            {% for option in sort_options %}
+              <li>
+                <a class="sort__link" href="?sort={{ option.key }}"{% if option.key == current_sort %} aria-current="true"{% endif %}>{{ option.label }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </div>
+
+      <div class="product-grid">
+        {% for product in products %}
+          {% include "products/product_card.html" %}
+        {% endfor %}
+      </div>
+
+    {% else %}
+      <div class="empty-state">
+        <h2>No products in {{ category.name }} yet</h2>
+        <p>Products in this category will appear here once they are added. In the meantime, you can browse everything else in the shop.</p>
+        <a class="btn btn--primary" href="{% url 'products:shop' %}">Browse all products</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

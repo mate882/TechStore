@@ -1,0 +1,395 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Delivery Information | TechGrid{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/delivery.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="delivery-page">
+
+    <!-- Hero -->
+    <section class="delivery-hero">
+        <div class="container delivery-hero__layout">
+            <div class="delivery-hero__content">
+                <span class="delivery-eyebrow">DELIVERY INFORMATION</span>
+
+                <h1>
+                    From our store
+                    <span>to your setup.</span>
+                </h1>
+
+                <p>
+                    Ordering networking or security equipment should be straightforward.
+                    We confirm product availability, the final price, and delivery
+                    arrangements with you before your order is finalized.
+                </p>
+
+                <div class="delivery-hero__actions">
+                    <a class="delivery-button" href="{% url 'products:shop' %}">
+                        Explore products
+                        <span aria-hidden="true">→</span>
+                    </a>
+
+                    <a class="delivery-text-link" href="{% url 'products:contact' %}">
+                        Ask a question
+                    </a>
+                </div>
+            </div>
+
+            <div class="delivery-hero__visual" aria-hidden="true">
+                <div class="delivery-visual__grid"></div>
+
+                <div class="delivery-visual__route delivery-visual__route--one"></div>
+                <div class="delivery-visual__route delivery-visual__route--two"></div>
+
+                <div class="delivery-visual__pin delivery-visual__pin--one">
+                    <span></span>
+                </div>
+
+                <div class="delivery-visual__pin delivery-visual__pin--two">
+                    <span></span>
+                </div>
+
+                <div class="delivery-visual__package">
+                    <svg viewBox="0 0 100 100" fill="none">
+                        <path d="M15 32 50 13l35 19v39L50 91 15 71z"/>
+                        <path d="m15 32 35 20 35-20M50 52v39"/>
+                        <path d="m33 22 35 20M33 22v17l35 20V42"/>
+                    </svg>
+                </div>
+
+                <div class="delivery-visual__label">
+                    <span class="delivery-visual__status"></span>
+                    DELIVERY DETAILS CONFIRMED WITH YOU
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Important delivery information -->
+    <section class="delivery-overview">
+        <div class="container">
+            <div class="delivery-section-heading">
+                <span class="delivery-eyebrow">BEFORE YOU ORDER</span>
+                <h2>Know what to expect.</h2>
+                <p>
+                    Every order is confirmed with you so that the product,
+                    price, and delivery arrangements are clear before proceeding.
+                </p>
+            </div>
+
+            <div class="delivery-overview__grid">
+
+                <article class="delivery-info-card">
+                    <span class="delivery-info-card__number">01</span>
+
+                    <div class="delivery-info-card__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <rect x="3" y="4" width="18" height="16" rx="2"/>
+                            <path d="M7 8h10M7 12h6M7 16h4"/>
+                        </svg>
+                    </div>
+
+                    <h3>Product availability</h3>
+                    <p>
+                        We confirm whether your selected products are available
+                        before finalizing your order.
+                    </p>
+                </article>
+
+                <article class="delivery-info-card">
+                    <span class="delivery-info-card__number">02</span>
+
+                    <div class="delivery-info-card__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M12 7v5l3 2"/>
+                        </svg>
+                    </div>
+
+                    <h3>Delivery timeframe</h3>
+                    <p>
+                        The expected delivery date or timeframe is discussed
+                        and confirmed with you for your order.
+                    </p>
+                </article>
+
+                <article class="delivery-info-card">
+                    <span class="delivery-info-card__number">03</span>
+
+                    <div class="delivery-info-card__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M3 7h11v11H3zM14 11h4l3 3v4h-7z"/>
+                            <circle cx="7.5" cy="19" r="1.5"/>
+                            <circle cx="17.5" cy="19" r="1.5"/>
+                        </svg>
+                    </div>
+
+                    <h3>Delivery cost</h3>
+                    <p>
+                        The applicable delivery cost is confirmed with you
+                        before the order is finalized.
+                    </p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- How delivery works -->
+    <section class="delivery-process">
+        <div class="container delivery-process__layout">
+
+            <div class="delivery-process__intro">
+                <span class="delivery-eyebrow">HOW IT WORKS</span>
+                <h2>Four steps to a confirmed order.</h2>
+                <p>
+                    We keep the process direct so you know what you're ordering
+                    and what to expect before your equipment is dispatched.
+                </p>
+
+                <a class="delivery-text-link" href="{% url 'products:shop' %}">
+                    Browse the catalog
+                    <span aria-hidden="true">→</span>
+                </a>
+            </div>
+
+            <div class="delivery-steps">
+
+                <article class="delivery-step">
+                    <span class="delivery-step__number">01</span>
+                    <div>
+                        <h3>Choose your equipment</h3>
+                        <p>
+                            Browse our catalog and select the cameras, recorders,
+                            switches, cables, or other listed products you need.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="delivery-step">
+                    <span class="delivery-step__number">02</span>
+                    <div>
+                        <h3>Send your order request</h3>
+                        <p>
+                            Submit your selected products through our ordering
+                            process and provide the information needed to contact you.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="delivery-step">
+                    <span class="delivery-step__number">03</span>
+                    <div>
+                        <h3>Confirm the details</h3>
+                        <p>
+                            We confirm availability, final pricing, delivery cost,
+                            delivery arrangements, and the expected timeframe with you.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="delivery-step">
+                    <span class="delivery-step__number">04</span>
+                    <div>
+                        <h3>Finalize your order</h3>
+                        <p>
+                            Once the details and applicable payment arrangements
+                            have been agreed, your order can proceed.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Delivery arrangements -->
+    <section class="delivery-arrangements">
+        <div class="container delivery-arrangements__layout">
+
+            <div class="delivery-arrangements__heading">
+                <span class="delivery-eyebrow">DELIVERY ARRANGEMENTS</span>
+                <h2>Details that matter.</h2>
+                <p>
+                    Delivery arrangements can depend on the destination,
+                    selected products, and order requirements.
+                </p>
+            </div>
+
+            <div class="delivery-arrangements__items">
+
+                <article class="delivery-arrangement">
+                    <span class="delivery-arrangement__symbol" aria-hidden="true">A</span>
+                    <div>
+                        <h3>Delivery destination</h3>
+                        <p>
+                            Contact us with your delivery location so we can
+                            confirm whether delivery can be arranged and explain
+                            the available options.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="delivery-arrangement">
+                    <span class="delivery-arrangement__symbol" aria-hidden="true">B</span>
+                    <div>
+                        <h3>Order size and equipment</h3>
+                        <p>
+                            If you need multiple products or a larger business order,
+                            let us know. We'll confirm the relevant arrangements
+                            with you.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="delivery-arrangement">
+                    <span class="delivery-arrangement__symbol" aria-hidden="true">C</span>
+                    <div>
+                        <h3>Receiving your order</h3>
+                        <p>
+                            Make sure the agreed delivery details and contact
+                            information are correct. If anything changes,
+                            contact us as soon as possible.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="delivery-faq">
+        <div class="container delivery-faq__layout">
+
+            <div class="delivery-faq__intro">
+                <span class="delivery-eyebrow">COMMON QUESTIONS</span>
+                <h2>Delivery, explained.</h2>
+                <p>
+                    Can't find the information you need?
+                    <a href="{% url 'products:contact' %}">Contact our team.</a>
+                </p>
+            </div>
+
+            <div class="delivery-faq__list">
+
+                <details class="delivery-faq__item">
+                    <summary>
+                        How much does delivery cost?
+                        <span class="delivery-faq__toggle" aria-hidden="true"></span>
+                    </summary>
+                    <div class="delivery-faq__answer">
+                        <p>
+                            Delivery costs are confirmed with you based on the
+                            arrangements available for your order and destination.
+                            Ask us for the applicable cost before finalizing your order.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="delivery-faq__item">
+                    <summary>
+                        How long will delivery take?
+                        <span class="delivery-faq__toggle" aria-hidden="true"></span>
+                    </summary>
+                    <div class="delivery-faq__answer">
+                        <p>
+                            The expected delivery date or timeframe is confirmed
+                            with you during the order process. Please contact us
+                            before ordering if your delivery is time-sensitive.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="delivery-faq__item">
+                    <summary>
+                        Do you deliver to my location?
+                        <span class="delivery-faq__toggle" aria-hidden="true"></span>
+                    </summary>
+                    <div class="delivery-faq__answer">
+                        <p>
+                            Contact us with your destination to confirm whether
+                            delivery can be arranged and what options are available.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="delivery-faq__item">
+                    <summary>
+                        Can I order several products together?
+                        <span class="delivery-faq__toggle" aria-hidden="true"></span>
+                    </summary>
+                    <div class="delivery-faq__answer">
+                        <p>
+                            You can submit multiple products in an order request.
+                            We will confirm their availability and the applicable
+                            delivery arrangements with you.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="delivery-faq__item">
+                    <summary>
+                        What if a product is unavailable?
+                        <span class="delivery-faq__toggle" aria-hidden="true"></span>
+                    </summary>
+                    <div class="delivery-faq__answer">
+                        <p>
+                            We will clarify availability with you before the order
+                            is finalized. Ask us whether an alternative or a later
+                            delivery arrangement is possible.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="delivery-faq__item">
+                    <summary>
+                        When is my order confirmed?
+                        <span class="delivery-faq__toggle" aria-hidden="true"></span>
+                    </summary>
+                    <div class="delivery-faq__answer">
+                        <p>
+                            Sending an order request does not by itself confirm
+                            product availability or delivery. We will communicate
+                            the order details and applicable arrangements with you
+                            before proceeding.
+                        </p>
+                    </div>
+                </details>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="delivery-cta">
+        <div class="container delivery-cta__inner">
+            <div>
+                <span class="delivery-eyebrow">READY TO GET STARTED?</span>
+                <h2>Let's get your equipment sorted.</h2>
+                <p>
+                    Explore the catalog or get in touch to confirm your delivery details.
+                </p>
+            </div>
+
+            <div class="delivery-cta__actions">
+                <a class="delivery-button delivery-button--light"
+                   href="{% url 'products:shop' %}">
+                    Browse products
+                    <span aria-hidden="true">→</span>
+                </a>
+
+                <a class="delivery-cta__secondary"
+                   href="{% url 'products:contact' %}">
+                    Contact us
+                </a>
+            </div>
+        </div>
+    </section>
+
+</main>
+{% endblock %}

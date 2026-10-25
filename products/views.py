@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Product, Category
-
+from django.conf import settings
+from django.shortcuts import render
 
 # Sorting choices offered on the page. The key is what appears in the URL (?sort=price_asc).
 SORT_OPTIONS = {
@@ -15,15 +16,8 @@ DEFAULT_SORT = "newest"
 def warranty(request):
     return render(request, "products/warranty.html")
 
-def returns(request):
-    return render(request, "products/returns.html")
-
 def delivery(request):
     return render(request, "products/delivery.html")
-
-from django.conf import settings
-from django.shortcuts import render
-
 
 def contacts(request):
     context = {

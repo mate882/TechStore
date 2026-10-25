@@ -97,6 +97,36 @@
     updateCart(cart);
   });
 
+  // Order via WhatsApp
+    document.getElementById('order-whatsapp').addEventListener('click', function () {
+    var number = this.getAttribute('data-whatsapp');
+    var cart = window.TechGrid.readCart();
+    if (!cart.length || !number) return;
+
+    var lines = ['Hello, I would like to place an order:', ''];
+    var total = 0;
+
+    cart.forEach(function (item, i) {
+        var lineTotal = Number(item.price) * Number(item.qty);
+        total += lineTotal;
+
+        lines.push((i + 1) + '. ' + item.name);
+        lines.push('   SKU: ' + item.sku);
+        lines.push('   Qty: ' + item.qty + ' × ' + formatPrice(item.price) + ' = ' + formatPrice(lineTotal));
+        if (item.url) {
+        lines.push('   ' + item.url);
+        }
+        lines.push('');
+    });
+
+    lines.push('Estimated total: ' + formatPrice(total));
+    lines.push('');
+    lines.push('(Please confirm availability and final price.)');
+
+    var url = 'https://wa.me/' + number + '?text=' + encodeURIComponent(lines.join('\n'));
+    window.open(url, '_blank', 'noopener');
+    });
+
   // Initial render
   document.addEventListener('DOMContentLoaded', renderCart);
 })();

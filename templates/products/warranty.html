@@ -1,0 +1,60 @@
+```html
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Warranty Information | TechGrid{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/warranty.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="warranty-page">
+    <div class="warranty-container">
+        <p class="warranty-eyebrow">CUSTOMER SUPPORT</p>
+        <h1>Warranty Information</h1>
+        <p class="warranty-intro">
+            We want you to shop with confidence. Here is what you need to know
+            about warranty coverage for products purchased from TechGrid.
+        </p>
+
+        <div class="warranty-section">
+            <h2>Warranty coverage</h2>
+            <p>
+                Warranty periods and conditions vary depending on the product.
+                Before placing an order, contact us to confirm the warranty
+                applicable to your chosen item.
+            </p>
+        </div>
+
+        <div class="warranty-section">
+            <h2>Making a warranty claim</h2>
+            <p>
+                If a product develops a fault, contact us and provide your
+                order details, a description of the issue, and photos or videos
+                where helpful. We will explain the next steps for your case.
+            </p>
+        </div>
+
+        <div class="warranty-section">
+            <h2>Your consumer rights</h2>
+            <p>
+                Any applicable statutory consumer rights remain in effect
+                regardless of a manufacturer's commercial warranty. Warranty
+                terms do not limit rights provided by applicable law.
+            </p>
+        </div>
+
+        <div class="warranty-contact">
+            <div>
+                <h2>Have a question?</h2>
+                <p>Contact us to check the warranty terms for a specific product.</p>
+            </div>
+            <a href="{% url 'products:contact' %}" class="warranty-button">
+                Contact us
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+```

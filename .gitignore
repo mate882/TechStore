@@ -1,0 +1,96 @@
+# ==========================================
+# macOS System Files
+# ==========================================
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Trashes
+.Spotlight-V100
+.locale-attribute
+
+# ==========================================
+# Environments & Virtual Envs
+# ==========================================
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+bin/
+include/
+lib/
+lib64/
+share/
+pyvenv.cfg
+
+# ==========================================
+# Environment Variables & Secrets
+# ==========================================
+.env
+.env.local
+.env.*.local
+*.env
+
+# ==========================================
+# Python & Byte-compiled / Optimized Files
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / Packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+
+# ==========================================
+# Django Specifics
+# ==========================================
+# Local SQLite database (exclude dev DB, keep schema migrations)
+*.sqlite3
+*.db
+
+# Django media & static uploads (user-generated or compiled assets)
+/media/
+/static_root/
+/staticfiles/
+
+# Logs
+*.log
+logs/
+
+# ==========================================
+# Testing, Coverage & Quality Tools
+# ==========================================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+
+# ==========================================
+# Code Editors & IDEs
+# ==========================================
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# PyCharm / JetBrains
+.idea/
+
+# Jupyter / IPython Notebooks
+.ipynb_checkpoints
